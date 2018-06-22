@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2002
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoCalculator_Alex", "AutoCalculator_Alex\AutoCalculator_Alex.csproj", "{03F019E5-DD5A-47E5-9FF9-F0C9754C06EB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{03F019E5-DD5A-47E5-9FF9-F0C9754C06EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03F019E5-DD5A-47E5-9FF9-F0C9754C06EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03F019E5-DD5A-47E5-9FF9-F0C9754C06EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03F019E5-DD5A-47E5-9FF9-F0C9754C06EB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1C0DCA62-9B25-4691-A692-FCF0B90A2CD1}
+	EndGlobalSection
+EndGlobal
