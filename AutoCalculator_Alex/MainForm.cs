@@ -15,7 +15,7 @@ namespace AutoCalculator_Alex
             //0. Если пользователь забыл ввести данные:
             if (textBoxEngineCapacity.Text == "" || textBoxEnginePower.Text == "" || textBoxPrice.Text == "")
             {
-                MessageBox.Show("Введите значения в поля"); //Выводим ошибку
+                MessageBox.Show("Данные не могут быть считаны. \n\nЗаполнены не все поля.", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error); //Выводим ошибку
                 return; //Останавливаем работу функции
             }
 
@@ -23,6 +23,7 @@ namespace AutoCalculator_Alex
             int age = 0;    // Возраст автомобиля
             int enginePower = 0;    // Мощность двигателя
             int engineCapacity = 0; // Объём двигателя
+            bool isDiesel;          // Дизельный двигатель?
             int priceRUB = 0;       // Стоимость автомобиля в рублях
 
             //_____1. Считывание данных с формы:
@@ -44,6 +45,9 @@ namespace AutoCalculator_Alex
             enginePower = Convert.ToInt32(textBoxEnginePower.Text);
             engineCapacity = Convert.ToInt32(textBoxEngineCapacity.Text);
 
+            if (comboBoxEngineType.Text == "Дизельный")
+                isDiesel = true;
+
             // Считываем цену в рублях:
             priceRUB = Convert.ToInt32(textBoxPrice.Text);
 
@@ -52,10 +56,26 @@ namespace AutoCalculator_Alex
             int secondary = Calc_SecondaryFee(priceRUB);                        // Сбор за таможенное оформление
             int recycle = Calc_FeeRecycle(isLegal, age, engineCapacity);        // Утилизационный сбор
 
+            //+ Для юридических лиц:
+            int excise = 0;
+            int NDS = 0;
+            if (isLegal)
+            {
+                //Рассчитываем акциз и НДС:
+                excise = Calc_Excise(enginePower);
+                NDS = Calc_NDS(priceRUB, mainTax, excise);
+            }
+
             //______3. Вывод результатов:
-            labelTaxResult.Text = mainTax.ToString();
-            labelSecondaryFeeResult.Text = secondary.ToString();
-            labelFeeRecycleResult.Text = recycle.ToString();
+            labelTaxResult.Text = String.Format("{0:N0}", mainTax) + " руб.";
+            labelSecondaryFeeResult.Text = String.Format("{0:N0}", secondary) + " руб.";
+            labelFeeRecycleResult.Text = String.Format("{0:N0}", recycle) + " руб.";
+            labelExciseResult.Text = String.Format("{0:N0}", excise) + " руб.";
+            labelNDSResult.Text = String.Format("{0:N0}", NDS) + " руб.";
+
+            //Расчёт итоговой стоимости:
+            int finalresult = mainTax + secondary + recycle + excise + NDS;
+            labelFinalResult.Text = String.Format("{0:N0}", finalresult) + " руб.";
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -65,16 +85,16 @@ namespace AutoCalculator_Alex
             comboBoxEngineType.SelectedIndex = 0;
         }
 
-        //Вычисление основной пошлины:
+        //Основная пошлина:
         private int Calc_MainTax(bool isLegal, int age, int engine, int priceRUB)
         {
-            double fee = 0;
-            double minimumFee;
+            double fee = 0; //Пошлина
+            double minimumFee; //Минимальный размер пошлины для рассматриваемого авто
 
-            int priceEUR = priceRUB / 73;
+            int priceEUR = priceRUB / 73; // Цена в евро
 
-            double percent = 0;
-            double minCoef = 0;
+            double percent = 0; //Процент от стоимости авто
+            double minCoef = 0; //Минимальный коэффициент евро/см (относительно объёма двигателя)
 
             //Физические лица:
             if (!isLegal)
@@ -147,17 +167,104 @@ namespace AutoCalculator_Alex
                 }
             }
             else
-
+            //Юридические лица:
             if (isLegal)
             {
+                //Старше 3 лет:
+                if (age <= 3)
+                {
+                    if (engine <= 1000)
+                    {
+                        percent = 0.23;
+                        minCoef = 0.67;
+                    }
+                    else if (engine <= 1500)
+                    {
+                        percent = 0.23;
+                        minCoef = 0.73;
+                    }
+                    else if (engine <= 1800)
+                    {
+                        percent = 0.23;
+                        minCoef = 0.83;
+                    }
+                    else if (engine <= 2300)
+                    {
+                        percent = 0.23;
+                        minCoef = 1.2;
+                    }
+                    else if (engine <= 3000)
+                    {
+                        percent = 0.23;
+                        minCoef = 1.2;
+                    }
+                    else if (engine > 3000)
+                    {
+                        percent = 0.23;
+                        minCoef = 1.57;
+                    }
+                }
+                //От 3 до 7 лет:
+                else if (age > 3 && age <= 7)
+                {
+                    if (engine <= 1000)
+                    {
+                        percent = 0.25;
+                        minCoef = 0.45;
+                    }
+                    else if (engine <= 1500)
+                    {
+                        percent = 0.25;
+                        minCoef = 0.5;
+                    }
+                    else if (engine <= 1800)
+                    {
+                        percent = 0.25;
+                        minCoef = 0.45;
+                    }
+                    else if (engine <= 2300)
+                    {
+                        percent = 0.25;
+                        minCoef = 0.55;
+                    }
+                    else if (engine <= 3000)
+                    {
+                        percent = 0.25;
+                        minCoef = 0.55;
+                    }
+                    else if (engine > 3000)
+                    {
+                        percent = 0.25;
+                        minCoef = 1;
+                    }
+                }
+                //Старше 7 лет:
+                else if (age > 7)
+                {
+                    if (engine <= 1000)
+                        minCoef = 1.4;
+                    else if (engine <= 1500)
+                        minCoef = 1.5;
+                    else if (engine <= 1800)
+                        minCoef = 1.6;
+                    else if (engine <= 2300)
+                        minCoef = 2.2;
+                    else if (engine <= 3000)
+                        minCoef = 3.2;
+                    else if (engine > 3000)
+                        minCoef = 3.2;
+                }
             }
 
+            //Вычисляем таможенную ставку (в евро):
             fee = priceEUR * percent;
             minimumFee = engine * minCoef;
 
+            //Если ставка ниже минимально разрешённого порога, принимаем порог:
             if (fee < minimumFee)
                 fee = minimumFee;
 
+            //Переводим рубли в евро:
             fee = fee * 73;
 
             return Convert.ToInt32(fee);
@@ -251,6 +358,45 @@ namespace AutoCalculator_Alex
             return Convert.ToInt32(fee);
         }
 
+        //Акциз:
+        private int Calc_Excise(int enginePower)
+        {
+            int excise = 0;    //Акциз
+            int priceCoef = 0; //Коэффициент руб/л.с.
+
+            //Задаём коэффициент на основании мощности двигателя:
+            if (enginePower <= 90)
+                priceCoef = 0;
+            else if (enginePower <= 150)
+                priceCoef = 45;
+            else if (enginePower <= 200)
+                priceCoef = 437;
+            else if (enginePower <= 300)
+                priceCoef = 714;
+            else if (enginePower <= 400)
+                priceCoef = 1218;
+            else if (enginePower <= 500)
+                priceCoef = 1260;
+            else if (enginePower > 500)
+                priceCoef = 1302;
+
+            //Рассчитываем акциз:
+            excise = enginePower * priceCoef;
+
+            return excise;
+        }
+
+        //НДС:
+        private int Calc_NDS(int price, int mainTax, int excise)
+        {
+            // НДС (18%) расчитывается от суммы: стоимость авто + таможенная пошлина + акциз.
+            double NDS;
+
+            NDS = (price + mainTax + excise) * 0.18;
+
+            return Convert.ToInt32(NDS);
+        }
+
         #region Проверка_вводимых_символов
 
         //Функция, проверяющая напечатанный символ:
@@ -279,35 +425,5 @@ namespace AutoCalculator_Alex
         }
 
         #endregion Проверка_вводимых_символов
-
-        private void textBoxPrice_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void labelAutoPrice_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void labelEngineSize_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBoxEngineCapacity_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBoxEnginePower_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void labelEnginePower_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
