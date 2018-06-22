@@ -369,7 +369,7 @@
             this.buttonCalulate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonCalulate.Location = new System.Drawing.Point(11, 557);
             this.buttonCalulate.Name = "buttonCalulate";
-            this.buttonCalulate.Size = new System.Drawing.Size(362, 38);
+            this.buttonCalulate.Size = new System.Drawing.Size(377, 38);
             this.buttonCalulate.TabIndex = 7;
             this.buttonCalulate.Text = "Рассчитать";
             this.buttonCalulate.UseVisualStyleBackColor = true;
@@ -586,7 +586,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(195)))), ((int)(((byte)(218)))));
-            this.ClientSize = new System.Drawing.Size(400, 607);
+            this.ClientSize = new System.Drawing.Size(400, 604);
             this.Controls.Add(this.tableLayoutPanelBottom);
             this.Controls.Add(this.tableLayoutLegal);
             this.Controls.Add(this.tableLayoutPanel1);

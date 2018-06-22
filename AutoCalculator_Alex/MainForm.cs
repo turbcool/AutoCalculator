@@ -23,7 +23,7 @@ namespace AutoCalculator_Alex
             int age = 0;    // Возраст автомобиля
             int enginePower = 0;    // Мощность двигателя
             int engineCapacity = 0; // Объём двигателя
-            bool isDiesel;          // Дизельный двигатель?
+            bool isDiesel = false;  // Дизельный двигатель?
             int priceRUB = 0;       // Стоимость автомобиля в рублях
 
             //_____1. Считывание данных с формы:
@@ -52,7 +52,7 @@ namespace AutoCalculator_Alex
             priceRUB = Convert.ToInt32(textBoxPrice.Text);
 
             //______2. Расчёт данных:
-            int mainTax = Calc_MainTax(isLegal, age, engineCapacity, priceRUB); // Таможенная пошлина
+            int mainTax = Calc_MainTax(isLegal, age, engineCapacity, isDiesel, priceRUB); // Таможенная пошлина
             int secondary = Calc_SecondaryFee(priceRUB);                        // Сбор за таможенное оформление
             int recycle = Calc_FeeRecycle(isLegal, age, engineCapacity);        // Утилизационный сбор
 
@@ -80,13 +80,13 @@ namespace AutoCalculator_Alex
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            comboBoxPerson.SelectedIndex = 0;
+            comboBoxPerson.SelectedIndex = 1;
             comboBoxAge.SelectedIndex = 0;
             comboBoxEngineType.SelectedIndex = 0;
         }
 
         //Основная пошлина:
-        private int Calc_MainTax(bool isLegal, int age, int engine, int priceRUB)
+        private int Calc_MainTax(bool isLegal, int age, int engine, bool isDiesel, int priceRUB)
         {
             double fee = 0; //Пошлина
             double minimumFee; //Минимальный размер пошлины для рассматриваемого авто
@@ -170,89 +170,144 @@ namespace AutoCalculator_Alex
             //Юридические лица:
             if (isLegal)
             {
-                //Старше 3 лет:
-                if (age <= 3)
+                if (!isDiesel)
                 {
-                    if (engine <= 1000)
+                    //Меньше 3 лет:
+                    if (age <= 3)
                     {
-                        percent = 0.23;
-                        minCoef = 0.67;
+                        if (engine <= 1000)
+                        {
+                            percent = 0.23;
+                            minCoef = 0.67;
+                        }
+                        else if (engine <= 1500)
+                        {
+                            percent = 0.23;
+                            minCoef = 0.73;
+                        }
+                        else if (engine <= 1800)
+                        {
+                            percent = 0.23;
+                            minCoef = 0.83;
+                        }
+                        else if (engine <= 2300)
+                        {
+                            percent = 0.23;
+                            minCoef = 1.2;
+                        }
+                        else if (engine <= 3000)
+                        {
+                            percent = 0.23;
+                            minCoef = 1.2;
+                        }
+                        else if (engine > 3000)
+                        {
+                            percent = 0.23;
+                            minCoef = 1.57;
+                        }
                     }
-                    else if (engine <= 1500)
+                    //От 3 до 7 лет:
+                    else if (age > 3 && age <= 7)
                     {
-                        percent = 0.23;
-                        minCoef = 0.73;
+                        if (engine <= 1000)
+                        {
+                            percent = 0.25;
+                            minCoef = 0.45;
+                        }
+                        else if (engine <= 1500)
+                        {
+                            percent = 0.25;
+                            minCoef = 0.5;
+                        }
+                        else if (engine <= 1800)
+                        {
+                            percent = 0.25;
+                            minCoef = 0.45;
+                        }
+                        else if (engine <= 2300)
+                        {
+                            percent = 0.25;
+                            minCoef = 0.55;
+                        }
+                        else if (engine <= 3000)
+                        {
+                            percent = 0.25;
+                            minCoef = 0.55;
+                        }
+                        else if (engine > 3000)
+                        {
+                            percent = 0.25;
+                            minCoef = 1;
+                        }
                     }
-                    else if (engine <= 1800)
+                    //Старше 7 лет:
+                    else if (age > 7)
                     {
-                        percent = 0.23;
-                        minCoef = 0.83;
-                    }
-                    else if (engine <= 2300)
-                    {
-                        percent = 0.23;
-                        minCoef = 1.2;
-                    }
-                    else if (engine <= 3000)
-                    {
-                        percent = 0.23;
-                        minCoef = 1.2;
-                    }
-                    else if (engine > 3000)
-                    {
-                        percent = 0.23;
-                        minCoef = 1.57;
+                        if (engine <= 1000)
+                            minCoef = 1.4;
+                        else if (engine <= 1500)
+                            minCoef = 1.5;
+                        else if (engine <= 1800)
+                            minCoef = 1.6;
+                        else if (engine <= 2300)
+                            minCoef = 2.2;
+                        else if (engine <= 3000)
+                            minCoef = 3.2;
+                        else if (engine > 3000)
+                            minCoef = 3.2;
                     }
                 }
-                //От 3 до 7 лет:
-                else if (age > 3 && age <= 7)
+                else
+                if (isDiesel)
                 {
-                    if (engine <= 1000)
+                    //Меньше 3 лет:
+                    if (age <= 3)
                     {
-                        percent = 0.25;
-                        minCoef = 0.45;
+                        if (engine <= 1500)
+                        {
+                            percent = 0.23;
+                            minCoef = 0.8;
+                        }
+                        else if (engine <= 2500)
+                        {
+                            percent = 0.23;
+                            minCoef = 1.2;
+                        }
+                        else if (engine > 2500)
+                        {
+                            percent = 0.23;
+                            minCoef = 1.57;
+                        }
                     }
-                    else if (engine <= 1500)
+                    //От 3 до 7 лет:
+                    else if (age > 3 && age <= 7)
                     {
-                        percent = 0.25;
-                        minCoef = 0.5;
+                        if (engine <= 1500)
+                        {
+                            percent = 0.25;
+                            minCoef = 0.4;
+                        }
+                        else if (engine <= 2500)
+                        {
+                            percent = 0.25;
+                            minCoef = 0.5;
+                        }
+                        else if (engine > 2500)
+                        {
+                            percent = 0.25;
+                            minCoef = 1;
+                        }
                     }
-                    else if (engine <= 1800)
+                    //Старше 7 лет:
+                    else if (age > 7)
                     {
-                        percent = 0.25;
-                        minCoef = 0.45;
+                        if (engine <= 1500)
+                            minCoef = 1.5;
+                        else if (engine <= 2500)
+                            minCoef = 2.2;
+                        else if (engine > 2500)
+                            minCoef = 3.2;
                     }
-                    else if (engine <= 2300)
-                    {
-                        percent = 0.25;
-                        minCoef = 0.55;
-                    }
-                    else if (engine <= 3000)
-                    {
-                        percent = 0.25;
-                        minCoef = 0.55;
-                    }
-                    else if (engine > 3000)
-                    {
-                        percent = 0.25;
-                        minCoef = 1;
-                    }
-                }
-                //Старше 7 лет:
-                else if (age > 7)
-                {
-                    if (engine <= 1000)
-                        minCoef = 1.4;
-                    else if (engine <= 1500)
-                        minCoef = 1.5;
-                    else if (engine <= 1800)
-                        minCoef = 1.6;
-                    else if (engine <= 2300)
-                        minCoef = 2.2;
-                    else if (engine <= 3000)
-                        minCoef = 3.2;
-                    else if (engine > 3000)
-                        minCoef = 3.2;
                 }
             }
 
