@@ -41,18 +41,18 @@
             this.labelTax = new System.Windows.Forms.Label();
             this.labelFeeRecycle = new System.Windows.Forms.Label();
             this.tableLayoutInput = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.comboBoxPerson = new System.Windows.Forms.ComboBox();
+            this.textBoxEnginePower = new System.Windows.Forms.TextBox();
+            this.textBoxPrice = new System.Windows.Forms.TextBox();
             this.comboBoxAge = new System.Windows.Forms.ComboBox();
+            this.comboBoxPerson = new System.Windows.Forms.ComboBox();
             this.comboBoxEngineType = new System.Windows.Forms.ComboBox();
             this.textBoxEngineCapacity = new System.Windows.Forms.TextBox();
-            this.textBoxPrice = new System.Windows.Forms.TextBox();
-            this.textBoxEnginePower = new System.Windows.Forms.TextBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.labelFeeRecycleResult = new System.Windows.Forms.Label();
+            this.labelSecondaryFeeResult = new System.Windows.Forms.Label();
+            this.labelTaxResult = new System.Windows.Forms.Label();
             this.labelMainName = new System.Windows.Forms.Label();
             this.buttonCalulate = new System.Windows.Forms.Button();
-            this.labelTaxResult = new System.Windows.Forms.Label();
-            this.labelSecondaryFeeResult = new System.Windows.Forms.Label();
-            this.labelFeeRecycleResult = new System.Windows.Forms.Label();
             this.tableLayoutInput.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -216,6 +216,87 @@
             this.tableLayoutInput.Size = new System.Drawing.Size(339, 260);
             this.tableLayoutInput.TabIndex = 12;
             // 
+            // textBoxEnginePower
+            // 
+            this.textBoxEnginePower.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.textBoxEnginePower.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxEnginePower.Location = new System.Drawing.Point(172, 139);
+            this.textBoxEnginePower.MaxLength = 4;
+            this.textBoxEnginePower.Name = "textBoxEnginePower";
+            this.textBoxEnginePower.Size = new System.Drawing.Size(100, 22);
+            this.textBoxEnginePower.TabIndex = 20;
+            this.textBoxEnginePower.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxEnginePower_KeyPress);
+            // 
+            // textBoxPrice
+            // 
+            this.textBoxPrice.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.textBoxPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxPrice.Location = new System.Drawing.Point(172, 226);
+            this.textBoxPrice.MaxLength = 10;
+            this.textBoxPrice.Name = "textBoxPrice";
+            this.textBoxPrice.Size = new System.Drawing.Size(100, 22);
+            this.textBoxPrice.TabIndex = 19;
+            this.textBoxPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxPrice_KeyPress);
+            // 
+            // comboBoxAge
+            // 
+            this.comboBoxAge.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.comboBoxAge.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxAge.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBoxAge.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBoxAge.FormattingEnabled = true;
+            this.comboBoxAge.ItemHeight = 16;
+            this.comboBoxAge.Items.AddRange(new object[] {
+            "До 3 лет",
+            "От 3 до 5 лет",
+            "От 5 до 7 лет"});
+            this.comboBoxAge.Location = new System.Drawing.Point(172, 52);
+            this.comboBoxAge.Name = "comboBoxAge";
+            this.comboBoxAge.Size = new System.Drawing.Size(153, 24);
+            this.comboBoxAge.TabIndex = 15;
+            // 
+            // comboBoxPerson
+            // 
+            this.comboBoxPerson.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.comboBoxPerson.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxPerson.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBoxPerson.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBoxPerson.FormattingEnabled = true;
+            this.comboBoxPerson.ItemHeight = 16;
+            this.comboBoxPerson.Items.AddRange(new object[] {
+            "Физическое лицо",
+            "Юридическое лицо"});
+            this.comboBoxPerson.Location = new System.Drawing.Point(172, 9);
+            this.comboBoxPerson.Name = "comboBoxPerson";
+            this.comboBoxPerson.Size = new System.Drawing.Size(153, 24);
+            this.comboBoxPerson.TabIndex = 14;
+            // 
+            // comboBoxEngineType
+            // 
+            this.comboBoxEngineType.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.comboBoxEngineType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxEngineType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBoxEngineType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBoxEngineType.FormattingEnabled = true;
+            this.comboBoxEngineType.ItemHeight = 16;
+            this.comboBoxEngineType.Items.AddRange(new object[] {
+            "Бензиновый"});
+            this.comboBoxEngineType.Location = new System.Drawing.Point(172, 95);
+            this.comboBoxEngineType.Name = "comboBoxEngineType";
+            this.comboBoxEngineType.Size = new System.Drawing.Size(153, 24);
+            this.comboBoxEngineType.TabIndex = 16;
+            // 
+            // textBoxEngineCapacity
+            // 
+            this.textBoxEngineCapacity.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.textBoxEngineCapacity.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxEngineCapacity.Location = new System.Drawing.Point(172, 182);
+            this.textBoxEngineCapacity.MaxLength = 4;
+            this.textBoxEngineCapacity.Name = "textBoxEngineCapacity";
+            this.textBoxEngineCapacity.Size = new System.Drawing.Size(100, 22);
+            this.textBoxEngineCapacity.TabIndex = 18;
+            this.textBoxEngineCapacity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxEngineCapacity_KeyPress);
+            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
@@ -236,83 +317,35 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(339, 121);
             this.tableLayoutPanel1.TabIndex = 13;
             // 
-            // comboBoxPerson
+            // labelFeeRecycleResult
             // 
-            this.comboBoxPerson.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.comboBoxPerson.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxPerson.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBoxPerson.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.comboBoxPerson.FormattingEnabled = true;
-            this.comboBoxPerson.ItemHeight = 16;
-            this.comboBoxPerson.Items.AddRange(new object[] {
-            "Физическое лицо",
-            "Юридическое лицо"});
-            this.comboBoxPerson.Location = new System.Drawing.Point(172, 10);
-            this.comboBoxPerson.Name = "comboBoxPerson";
-            this.comboBoxPerson.Size = new System.Drawing.Size(153, 24);
-            this.comboBoxPerson.TabIndex = 14;
+            this.labelFeeRecycleResult.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelFeeRecycleResult.AutoSize = true;
+            this.labelFeeRecycleResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelFeeRecycleResult.Location = new System.Drawing.Point(172, 92);
+            this.labelFeeRecycleResult.Name = "labelFeeRecycleResult";
+            this.labelFeeRecycleResult.Size = new System.Drawing.Size(0, 16);
+            this.labelFeeRecycleResult.TabIndex = 14;
             // 
-            // comboBoxAge
+            // labelSecondaryFeeResult
             // 
-            this.comboBoxAge.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.comboBoxAge.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxAge.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBoxAge.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.comboBoxAge.FormattingEnabled = true;
-            this.comboBoxAge.ItemHeight = 16;
-            this.comboBoxAge.Items.AddRange(new object[] {
-            "До 3 лет",
-            "От 3 до 5 лет",
-            "От 5 до 7 лет"});
-            this.comboBoxAge.Location = new System.Drawing.Point(172, 53);
-            this.comboBoxAge.Name = "comboBoxAge";
-            this.comboBoxAge.Size = new System.Drawing.Size(153, 24);
-            this.comboBoxAge.TabIndex = 15;
+            this.labelSecondaryFeeResult.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelSecondaryFeeResult.AutoSize = true;
+            this.labelSecondaryFeeResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelSecondaryFeeResult.Location = new System.Drawing.Point(172, 52);
+            this.labelSecondaryFeeResult.Name = "labelSecondaryFeeResult";
+            this.labelSecondaryFeeResult.Size = new System.Drawing.Size(0, 16);
+            this.labelSecondaryFeeResult.TabIndex = 13;
             // 
-            // comboBoxEngineType
+            // labelTaxResult
             // 
-            this.comboBoxEngineType.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.comboBoxEngineType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxEngineType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBoxEngineType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.comboBoxEngineType.FormattingEnabled = true;
-            this.comboBoxEngineType.ItemHeight = 16;
-            this.comboBoxEngineType.Items.AddRange(new object[] {
-            "Бензиновый"});
-            this.comboBoxEngineType.Location = new System.Drawing.Point(172, 96);
-            this.comboBoxEngineType.Name = "comboBoxEngineType";
-            this.comboBoxEngineType.Size = new System.Drawing.Size(153, 24);
-            this.comboBoxEngineType.TabIndex = 16;
-            // 
-            // textBoxEngineCapacity
-            // 
-            this.textBoxEngineCapacity.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBoxEngineCapacity.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxEngineCapacity.Location = new System.Drawing.Point(172, 182);
-            this.textBoxEngineCapacity.MaxLength = 4;
-            this.textBoxEngineCapacity.Name = "textBoxEngineCapacity";
-            this.textBoxEngineCapacity.Size = new System.Drawing.Size(100, 22);
-            this.textBoxEngineCapacity.TabIndex = 18;
-            // 
-            // textBoxPrice
-            // 
-            this.textBoxPrice.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBoxPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxPrice.Location = new System.Drawing.Point(172, 226);
-            this.textBoxPrice.MaxLength = 10;
-            this.textBoxPrice.Name = "textBoxPrice";
-            this.textBoxPrice.Size = new System.Drawing.Size(100, 22);
-            this.textBoxPrice.TabIndex = 19;
-            // 
-            // textBoxEnginePower
-            // 
-            this.textBoxEnginePower.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBoxEnginePower.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxEnginePower.Location = new System.Drawing.Point(172, 139);
-            this.textBoxEnginePower.MaxLength = 4;
-            this.textBoxEnginePower.Name = "textBoxEnginePower";
-            this.textBoxEnginePower.Size = new System.Drawing.Size(100, 22);
-            this.textBoxEnginePower.TabIndex = 20;
+            this.labelTaxResult.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelTaxResult.AutoSize = true;
+            this.labelTaxResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelTaxResult.Location = new System.Drawing.Point(172, 12);
+            this.labelTaxResult.Name = "labelTaxResult";
+            this.labelTaxResult.Size = new System.Drawing.Size(0, 16);
+            this.labelTaxResult.TabIndex = 12;
             // 
             // labelMainName
             // 
@@ -334,36 +367,6 @@
             this.buttonCalulate.Text = "Рассчитать";
             this.buttonCalulate.UseVisualStyleBackColor = true;
             this.buttonCalulate.Click += new System.EventHandler(this.buttonCalulate_Click);
-            // 
-            // labelTaxResult
-            // 
-            this.labelTaxResult.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.labelTaxResult.AutoSize = true;
-            this.labelTaxResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelTaxResult.Location = new System.Drawing.Point(172, 12);
-            this.labelTaxResult.Name = "labelTaxResult";
-            this.labelTaxResult.Size = new System.Drawing.Size(0, 16);
-            this.labelTaxResult.TabIndex = 12;
-            // 
-            // labelSecondaryFeeResult
-            // 
-            this.labelSecondaryFeeResult.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.labelSecondaryFeeResult.AutoSize = true;
-            this.labelSecondaryFeeResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelSecondaryFeeResult.Location = new System.Drawing.Point(172, 52);
-            this.labelSecondaryFeeResult.Name = "labelSecondaryFeeResult";
-            this.labelSecondaryFeeResult.Size = new System.Drawing.Size(0, 16);
-            this.labelSecondaryFeeResult.TabIndex = 13;
-            // 
-            // labelFeeRecycleResult
-            // 
-            this.labelFeeRecycleResult.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.labelFeeRecycleResult.AutoSize = true;
-            this.labelFeeRecycleResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelFeeRecycleResult.Location = new System.Drawing.Point(172, 92);
-            this.labelFeeRecycleResult.Name = "labelFeeRecycleResult";
-            this.labelFeeRecycleResult.Size = new System.Drawing.Size(0, 16);
-            this.labelFeeRecycleResult.TabIndex = 14;
             // 
             // MainForm
             // 
