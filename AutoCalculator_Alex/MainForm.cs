@@ -48,13 +48,14 @@ namespace AutoCalculator_Alex
             priceRUB = Convert.ToInt32(textBoxPrice.Text);
 
             //______2. Расчёт данных:
-            int secondary = Calc_SecondaryFee(priceRUB);                 //Сбор за таможенное оформление
-            int recycle = Calc_FeeRecycle(isLegal, age, engineCapacity); // Утилизационный сбор
+            int mainTax = Calc_MainTax(isLegal, age, engineCapacity, priceRUB); // Таможенная пошлина
+            int secondary = Calc_SecondaryFee(priceRUB);                        // Сбор за таможенное оформление
+            int recycle = Calc_FeeRecycle(isLegal, age, engineCapacity);        // Утилизационный сбор
 
+            //______3. Вывод результатов:
+            labelTaxResult.Text = mainTax.ToString();
             labelSecondaryFeeResult.Text = secondary.ToString();
             labelFeeRecycleResult.Text = recycle.ToString();
-
-            Calc_FeeRecycle(false, 0, 0);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -67,12 +68,13 @@ namespace AutoCalculator_Alex
         //Вычисление основной пошлины:
         private int Calc_MainTax(bool isLegal, int age, int engine, int priceRUB)
         {
-            int fee = 0;
+            double fee = 0;
+            double minimumFee;
 
-            int priceEUR = priceRUB * 73;
+            int priceEUR = priceRUB / 73;
 
             double percent = 0;
-            double minCoef;
+            double minCoef = 0;
 
             //Физические лица:
             if (!isLegal)
@@ -150,9 +152,15 @@ namespace AutoCalculator_Alex
             {
             }
 
-            
+            fee = priceEUR * percent;
+            minimumFee = engine * minCoef;
 
-            return fee;
+            if (fee < minimumFee)
+                fee = minimumFee;
+
+            fee = fee * 73;
+
+            return Convert.ToInt32(fee);
         }
 
         //Сбор за таможенное оформление:
@@ -271,5 +279,35 @@ namespace AutoCalculator_Alex
         }
 
         #endregion Проверка_вводимых_символов
+
+        private void textBoxPrice_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelAutoPrice_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelEngineSize_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxEngineCapacity_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxEnginePower_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelEnginePower_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
