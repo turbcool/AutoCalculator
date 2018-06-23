@@ -56,22 +56,25 @@
             this.label3 = new System.Windows.Forms.Label();
             this.labelEng1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelPrice = new System.Windows.Forms.Label();
+            this.textBoxCurrencyValue = new System.Windows.Forms.NumericUpDown();
+            this.comboBoxCurrency = new System.Windows.Forms.ComboBox();
             this.tableLayoutLegal = new System.Windows.Forms.TableLayoutPanel();
+            this.labelNDSResult = new System.Windows.Forms.Label();
             this.labelExcise = new System.Windows.Forms.Label();
             this.labelNDS = new System.Windows.Forms.Label();
+            this.labelExciseResult = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.labelBottomLine = new System.Windows.Forms.Label();
             this.labelResult = new System.Windows.Forms.Label();
             this.tableLayoutPanelBottom = new System.Windows.Forms.TableLayoutPanel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.labelExciseResult = new System.Windows.Forms.Label();
-            this.labelNDSResult = new System.Windows.Forms.Label();
             this.labelFinalResult = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.buttonConf = new System.Windows.Forms.Button();
             this.tableLayoutTop.SuspendLayout();
             this.tableLayoutResult.SuspendLayout();
             this.tableLayoutMid.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textBoxCurrencyValue)).BeginInit();
             this.tableLayoutLegal.SuspendLayout();
             this.tableLayoutPanelBottom.SuspendLayout();
             this.SuspendLayout();
@@ -229,7 +232,8 @@
             this.comboBoxAge.Items.AddRange(new object[] {
             "До 3 лет",
             "От 3 до 5 лет",
-            "От 5 до 7 лет"});
+            "От 5 до 7 лет",
+            "Более 7 лет"});
             this.comboBoxAge.Location = new System.Drawing.Point(178, 48);
             this.comboBoxAge.Name = "comboBoxAge";
             this.comboBoxAge.Size = new System.Drawing.Size(153, 24);
@@ -285,7 +289,7 @@
             this.textBoxPrice.Location = new System.Drawing.Point(177, 9);
             this.textBoxPrice.MaxLength = 9;
             this.textBoxPrice.Name = "textBoxPrice";
-            this.textBoxPrice.Size = new System.Drawing.Size(86, 22);
+            this.textBoxPrice.Size = new System.Drawing.Size(71, 22);
             this.textBoxPrice.TabIndex = 6;
             this.textBoxPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxPrice_KeyPress);
             // 
@@ -355,14 +359,15 @@
             // 
             // labelMainName
             // 
+            this.labelMainName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.labelMainName.AutoSize = true;
             this.labelMainName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelMainName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(42)))), ((int)(((byte)(45)))));
-            this.labelMainName.Location = new System.Drawing.Point(7, 24);
+            this.labelMainName.Location = new System.Drawing.Point(27, 23);
             this.labelMainName.Name = "labelMainName";
-            this.labelMainName.Size = new System.Drawing.Size(385, 20);
+            this.labelMainName.Size = new System.Drawing.Size(346, 20);
             this.labelMainName.TabIndex = 12;
-            this.labelMainName.Text = "Калькулятор растаможивания автомобилей";
+            this.labelMainName.Text = "Таможенный калькулятор автомобилей";
             // 
             // buttonCalulate
             // 
@@ -381,7 +386,7 @@
             this.tableLayoutMid.ColumnCount = 3;
             this.tableLayoutMid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 169F));
             this.tableLayoutMid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutMid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 164F));
+            this.tableLayoutMid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 177F));
             this.tableLayoutMid.Controls.Add(this.label3, 2, 1);
             this.tableLayoutMid.Controls.Add(this.labelEnginePower, 0, 0);
             this.tableLayoutMid.Controls.Add(this.textBoxEnginePower, 1, 0);
@@ -404,18 +409,18 @@
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(242, 52);
+            this.label3.Location = new System.Drawing.Point(229, 52);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(31, 16);
             this.label3.TabIndex = 22;
-            this.label3.Text = "см2";
+            this.label3.Text = "см3";
             // 
             // labelEng1
             // 
             this.labelEng1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.labelEng1.AutoSize = true;
             this.labelEng1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelEng1.Location = new System.Drawing.Point(242, 12);
+            this.labelEng1.Location = new System.Drawing.Point(229, 12);
             this.labelEng1.Name = "labelEng1";
             this.labelEng1.Size = new System.Drawing.Size(29, 16);
             this.labelEng1.TabIndex = 21;
@@ -424,13 +429,17 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(213)))), ((int)(((byte)(229)))));
-            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnCount = 5;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 169F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 124F));
-            this.tableLayoutPanel1.Controls.Add(this.labelPrice, 2, 0);
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 66F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 52F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 34F));
             this.tableLayoutPanel1.Controls.Add(this.labelAutoPrice, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.textBoxPrice, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.comboBoxCurrency, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.buttonConf, 4, 0);
+            this.tableLayoutPanel1.Controls.Add(this.textBoxCurrencyValue, 3, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 266);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -440,23 +449,52 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(403, 40);
             this.tableLayoutPanel1.TabIndex = 21;
             // 
-            // labelPrice
+            // textBoxCurrencyValue
             // 
-            this.labelPrice.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.labelPrice.AutoSize = true;
-            this.labelPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelPrice.Location = new System.Drawing.Point(282, 12);
-            this.labelPrice.Name = "labelPrice";
-            this.labelPrice.Size = new System.Drawing.Size(35, 16);
-            this.labelPrice.TabIndex = 23;
-            this.labelPrice.Text = "руб.";
+            this.textBoxCurrencyValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.textBoxCurrencyValue.DecimalPlaces = 1;
+            this.textBoxCurrencyValue.Enabled = false;
+            this.textBoxCurrencyValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxCurrencyValue.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            this.textBoxCurrencyValue.Location = new System.Drawing.Point(320, 9);
+            this.textBoxCurrencyValue.Name = "textBoxCurrencyValue";
+            this.textBoxCurrencyValue.Size = new System.Drawing.Size(46, 22);
+            this.textBoxCurrencyValue.TabIndex = 25;
+            this.textBoxCurrencyValue.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.textBoxCurrencyValue.ValueChanged += new System.EventHandler(this.textBoxCurrencyValue_ValueChanged);
+            // 
+            // comboBoxCurrency
+            // 
+            this.comboBoxCurrency.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.comboBoxCurrency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxCurrency.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBoxCurrency.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBoxCurrency.FormattingEnabled = true;
+            this.comboBoxCurrency.ItemHeight = 16;
+            this.comboBoxCurrency.Items.AddRange(new object[] {
+            "Руб.",
+            "Евро",
+            "Долл."});
+            this.comboBoxCurrency.Location = new System.Drawing.Point(254, 8);
+            this.comboBoxCurrency.Name = "comboBoxCurrency";
+            this.comboBoxCurrency.Size = new System.Drawing.Size(60, 24);
+            this.comboBoxCurrency.TabIndex = 6;
+            this.comboBoxCurrency.SelectedIndexChanged += new System.EventHandler(this.comboBoxCurrency_SelectedIndexChanged);
             // 
             // tableLayoutLegal
             // 
             this.tableLayoutLegal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(213)))), ((int)(((byte)(229)))));
             this.tableLayoutLegal.ColumnCount = 2;
             this.tableLayoutLegal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 79F));
-            this.tableLayoutLegal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 108F));
+            this.tableLayoutLegal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 319F));
             this.tableLayoutLegal.Controls.Add(this.labelNDSResult, 1, 1);
             this.tableLayoutLegal.Controls.Add(this.labelExcise, 0, 0);
             this.tableLayoutLegal.Controls.Add(this.labelNDS, 0, 1);
@@ -470,6 +508,16 @@
             this.tableLayoutLegal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutLegal.Size = new System.Drawing.Size(403, 80);
             this.tableLayoutLegal.TabIndex = 15;
+            // 
+            // labelNDSResult
+            // 
+            this.labelNDSResult.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelNDSResult.AutoSize = true;
+            this.labelNDSResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelNDSResult.Location = new System.Drawing.Point(87, 52);
+            this.labelNDSResult.Name = "labelNDSResult";
+            this.labelNDSResult.Size = new System.Drawing.Size(0, 16);
+            this.labelNDSResult.TabIndex = 12;
             // 
             // labelExcise
             // 
@@ -492,6 +540,16 @@
             this.labelNDS.Size = new System.Drawing.Size(39, 16);
             this.labelNDS.TabIndex = 9;
             this.labelNDS.Text = "НДС:";
+            // 
+            // labelExciseResult
+            // 
+            this.labelExciseResult.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelExciseResult.AutoSize = true;
+            this.labelExciseResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelExciseResult.Location = new System.Drawing.Point(87, 12);
+            this.labelExciseResult.Name = "labelExciseResult";
+            this.labelExciseResult.Size = new System.Drawing.Size(0, 16);
+            this.labelExciseResult.TabIndex = 11;
             // 
             // label1
             // 
@@ -529,7 +587,7 @@
             this.tableLayoutPanelBottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(197)))), ((int)(((byte)(213)))), ((int)(((byte)(229)))));
             this.tableLayoutPanelBottom.ColumnCount = 2;
             this.tableLayoutPanelBottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 167F));
-            this.tableLayoutPanelBottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelBottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 231F));
             this.tableLayoutPanelBottom.Controls.Add(this.labelResult, 0, 0);
             this.tableLayoutPanelBottom.Controls.Add(this.labelFinalResult, 1, 0);
             this.tableLayoutPanelBottom.Location = new System.Drawing.Point(0, 509);
@@ -541,6 +599,16 @@
             this.tableLayoutPanelBottom.Size = new System.Drawing.Size(403, 40);
             this.tableLayoutPanelBottom.TabIndex = 16;
             // 
+            // labelFinalResult
+            // 
+            this.labelFinalResult.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelFinalResult.AutoSize = true;
+            this.labelFinalResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelFinalResult.Location = new System.Drawing.Point(175, 12);
+            this.labelFinalResult.Name = "labelFinalResult";
+            this.labelFinalResult.Size = new System.Drawing.Size(0, 16);
+            this.labelFinalResult.TabIndex = 24;
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -551,35 +619,16 @@
             this.label5.Text = "_________________________________________________________________________________" +
     "____________________________________________";
             // 
-            // labelExciseResult
+            // buttonConf
             // 
-            this.labelExciseResult.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.labelExciseResult.AutoSize = true;
-            this.labelExciseResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelExciseResult.Location = new System.Drawing.Point(87, 12);
-            this.labelExciseResult.Name = "labelExciseResult";
-            this.labelExciseResult.Size = new System.Drawing.Size(0, 16);
-            this.labelExciseResult.TabIndex = 11;
-            // 
-            // labelNDSResult
-            // 
-            this.labelNDSResult.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.labelNDSResult.AutoSize = true;
-            this.labelNDSResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelNDSResult.Location = new System.Drawing.Point(87, 52);
-            this.labelNDSResult.Name = "labelNDSResult";
-            this.labelNDSResult.Size = new System.Drawing.Size(0, 16);
-            this.labelNDSResult.TabIndex = 12;
-            // 
-            // labelFinalResult
-            // 
-            this.labelFinalResult.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.labelFinalResult.AutoSize = true;
-            this.labelFinalResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelFinalResult.Location = new System.Drawing.Point(175, 12);
-            this.labelFinalResult.Name = "labelFinalResult";
-            this.labelFinalResult.Size = new System.Drawing.Size(0, 16);
-            this.labelFinalResult.TabIndex = 24;
+            this.buttonConf.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.buttonConf.Font = new System.Drawing.Font("Arial Unicode MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonConf.Location = new System.Drawing.Point(372, 7);
+            this.buttonConf.Name = "buttonConf";
+            this.buttonConf.Size = new System.Drawing.Size(25, 25);
+            this.buttonConf.TabIndex = 24;
+            this.buttonConf.UseVisualStyleBackColor = true;
+            this.buttonConf.Click += new System.EventHandler(this.buttonConf_Click);
             // 
             // MainForm
             // 
@@ -605,7 +654,7 @@
             this.MinimizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Таможенный калькулятор";
+            this.Text = "Таможенный калькулятор автомобилей";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.tableLayoutTop.ResumeLayout(false);
             this.tableLayoutTop.PerformLayout();
@@ -615,6 +664,7 @@
             this.tableLayoutMid.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textBoxCurrencyValue)).EndInit();
             this.tableLayoutLegal.ResumeLayout(false);
             this.tableLayoutLegal.PerformLayout();
             this.tableLayoutPanelBottom.ResumeLayout(false);
@@ -654,7 +704,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label labelEng1;
-        private System.Windows.Forms.Label labelPrice;
         private System.Windows.Forms.TableLayoutPanel tableLayoutLegal;
         private System.Windows.Forms.Label labelExcise;
         private System.Windows.Forms.Label labelNDS;
@@ -666,6 +715,9 @@
         private System.Windows.Forms.Label labelNDSResult;
         private System.Windows.Forms.Label labelExciseResult;
         private System.Windows.Forms.Label labelFinalResult;
+        private System.Windows.Forms.ComboBox comboBoxCurrency;
+        private System.Windows.Forms.NumericUpDown textBoxCurrencyValue;
+        private System.Windows.Forms.Button buttonConf;
     }
 }
 

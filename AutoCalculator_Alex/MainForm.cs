@@ -5,6 +5,10 @@ namespace AutoCalculator_Alex
 {
     public partial class MainForm : Form
     {
+        //Курсы валют:
+        double EUR = 73.4;
+        double USD = 63.0;
+
         public MainForm()
         {
             InitializeComponent();
@@ -18,13 +22,14 @@ namespace AutoCalculator_Alex
                 MessageBox.Show("Данные не могут быть считаны. \n\nЗаполнены не все поля.", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error); //Выводим ошибку
                 return; //Останавливаем работу функции
             }
-
             bool isLegal;   // Юридическое лицо?
             int age = 0;    // Возраст автомобиля
             int enginePower = 0;    // Мощность двигателя
             int engineCapacity = 0; // Объём двигателя
             bool isDiesel = false;  // Дизельный двигатель?
+            int priceUser = 0;      // Стоимость автомобиля в валюте пользователя
             int priceRUB = 0;       // Стоимость автомобиля в рублях
+            string currency = "RUB";// Выбранная пользователем валюта
 
             //_____1. Считывание данных с формы:
 
@@ -40,6 +45,22 @@ namespace AutoCalculator_Alex
                 age = 4;
             else if (comboBoxAge.Text == "От 5 до 7 лет")
                 age = 6;
+            else if (comboBoxAge.Text == "Более 7 лет")
+                age = 10;
+
+            // Задаём выбранную пользователем валюту (currency):
+            if (comboBoxCurrency.Text == "Руб.")
+                currency = "RUB";
+            else if (comboBoxCurrency.Text == "Евро")
+            {
+                currency = "EUR";
+                EUR = Convert.ToDouble(textBoxCurrencyValue.Value);
+            }
+            else if (comboBoxCurrency.Text == "Долл.")
+            {
+                currency = "USD";
+                USD = Convert.ToDouble(textBoxCurrencyValue.Value);
+            }
 
             // Устанавливаем остальные параметры:
             enginePower = Convert.ToInt32(textBoxEnginePower.Text);
@@ -48,8 +69,17 @@ namespace AutoCalculator_Alex
             if (comboBoxEngineType.Text == "Дизельный")
                 isDiesel = true;
 
-            // Считываем цену в рублях:
-            priceRUB = Convert.ToInt32(textBoxPrice.Text);
+            // Считываем цену в валюте пользователя:
+            priceUser = Convert.ToInt32(textBoxPrice.Text);
+            // Переводим валюту пользователя в рубли:
+            if (currency == "RUB")
+                priceRUB = priceUser;
+            else if (currency == "EUR")
+                priceRUB = Convert.ToInt32(priceUser * EUR);
+            else if (currency == "USD")
+                priceRUB = Convert.ToInt32(priceUser * USD);
+
+            // (все функции принимают на вход сумму в рублях)
 
             //______2. Расчёт данных:
             int mainTax = Calc_MainTax(isLegal, age, engineCapacity, isDiesel, priceRUB); // Таможенная пошлина
@@ -80,9 +110,11 @@ namespace AutoCalculator_Alex
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            comboBoxPerson.SelectedIndex = 1;
+            comboBoxPerson.SelectedIndex = 0;
             comboBoxAge.SelectedIndex = 0;
             comboBoxEngineType.SelectedIndex = 0;
+            comboBoxCurrency.SelectedIndex = 0;
+            buttonConf.Text = "\u2699";
         }
 
         //Основная пошлина:
@@ -480,5 +512,32 @@ namespace AutoCalculator_Alex
         }
 
         #endregion Проверка_вводимых_символов
+
+        private void comboBoxCurrency_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBoxCurrency.Text == "Руб.")
+                textBoxCurrencyValue.Text = "1";
+            else if (comboBoxCurrency.Text == "Евро")
+                textBoxCurrencyValue.Text = EUR.ToString();
+            else if (comboBoxCurrency.Text == "Долл.")
+                textBoxCurrencyValue.Text = USD.ToString();
+        }
+
+        private void buttonConf_Click(object sender, EventArgs e)
+        {
+            textBoxCurrencyValue.Enabled = true;
+            buttonConf.Visible = false;
+        }
+
+        private void textBoxCurrencyValue_ValueChanged(object sender, EventArgs e)
+        {
+            if (textBoxCurrencyValue.Value > 99)
+                textBoxCurrencyValue.Value = 99;
+
+            if (comboBoxCurrency.Text == "Евро")
+                EUR = (double)textBoxCurrencyValue.Value;
+            else if (comboBoxCurrency.Text == "Долл.")
+                USD = (double)textBoxCurrencyValue.Value;
+        }
     }
 }
